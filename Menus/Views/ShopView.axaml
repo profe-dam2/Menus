@@ -10,6 +10,7 @@
         <vm:ShopViewModel/>
     </Design.DataContext>
     <Grid Background="Crimson">
-        
+        <Button Content="IR A INICIO" 
+                Command="{Binding NavigateToInicioCommand}"/>
     </Grid>
 </UserControl>

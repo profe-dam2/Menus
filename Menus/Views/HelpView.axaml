@@ -4,15 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Menus.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Menus.Views.HomeView"
-             x:DataType="vm:HomeViewModel">
+             x:Class="Menus.Views.HelpView"
+             x:DataType="vm:HelpViewModel">
     <Design.DataContext>
-        <vm:HomeViewModel />
+        <vm:HelpViewModel />
     </Design.DataContext>
-    <Grid Background="Green">
+    <Grid Background="DarkOrange">
         <StackPanel>
-            <Button Content="IR A TIENDA" 
-                    Command="{Binding NavigateShopCommand}"/>
+            <TextBlock Text="AYUDA AL USUARIO"/>
+            <Button Content="IR A INICIO"
+                    Command="{Binding NavigateToCommand}"
+                    CommandParameter="inicio"/>
+            <Button Content="IR A SHOP"
+                    Command="{Binding NavigateToCommand}"
+                    CommandParameter="tienda"/>
         </StackPanel>
     </Grid>
 </UserControl>

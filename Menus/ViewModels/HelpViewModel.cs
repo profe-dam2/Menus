@@ -3,19 +3,18 @@ using Menus.Services;
 
 namespace Menus.ViewModels;
 
-
-public partial class HomeViewModel:ViewModelBase
+public partial class HelpViewModel:ViewModelBase
 {
     private NavigationService navigationService;
-    public HomeViewModel(NavigationService navigationService)
+
+    public HelpViewModel(NavigationService navigationService)
     {
         this.navigationService = navigationService;
     }
 
     [RelayCommand]
-    public void NavigateShop()
+    public void NavigateTo(string tag_view)
     {
-        navigationService.NavigateTo(NavigationService.TIENDA_VIEW);
+        navigationService.NavigateTo(tag_view);
     }
-        
 }

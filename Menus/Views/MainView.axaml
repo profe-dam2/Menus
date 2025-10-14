@@ -14,8 +14,8 @@
   </Design.DataContext>
     
     <fa:NavigationView PaneDisplayMode="Left" 
-                       SelectedItem="{Binding SelectedMenuItem}"
-                       MenuItemsSource="{Binding MenuItems}">
+                       SelectedItem="{Binding NavigationService.SelectedMenuItem}"
+                       MenuItemsSource="{Binding NavigationService.MenuItems}">
         <!-- <fa:NavigationView.MenuItems> -->
         <!--     <fa:NavigationViewItem Content="Inicio" IconSource="Home"/> -->
         <!--     <fa:NavigationViewItem Content="Productos" IconSource="Shop"/> -->
