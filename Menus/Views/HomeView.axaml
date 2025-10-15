@@ -3,16 +3,56 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Menus.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Width="1280" Height="720"
+             d:DesignWidth="1280" 
+             d:DesignHeight="720"
+             mc:Ignorable="d" 
+            
              x:Class="Menus.Views.HomeView"
              x:DataType="vm:HomeViewModel">
     <Design.DataContext>
         <vm:HomeViewModel />
     </Design.DataContext>
-    <Grid Background="Green">
-        <StackPanel>
-            <Button Content="IR A TIENDA" 
-                    Command="{Binding NavigateShopCommand}"/>
+    
+    <!--CONTENEDOR PRINCIPAL DEL LOGIN -->
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" 
+                        Source="avares://Menus/Assets/fondomorado.jpg"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/> <!--COLUMNA PARA IMAGEN-->
+            <ColumnDefinition Width="*"/> <!--COLUMNA PARA FORMULARIO-->
+            <ColumnDefinition Width="300"/> <!--COLUMNA PARA BOTONES-->
+        </Grid.ColumnDefinitions>
+        
+        <!--COLUMNA 0 (IMAGEN)-->
+        <StackPanel Grid.Column="0">
+            <Image Width="90" 
+                   HorizontalAlignment="Left"
+                   Margin="25,10,0,0"
+                   Source="avares://Menus/Assets/mono.png"/>
         </StackPanel>
+        
+        <!--COLUMNA 1 (FORMULARIO)-->
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="Iniciar sesión "
+                       FontSize="40" 
+                       HorizontalAlignment="Center"
+                       Margin="0,80,0,0"/>
+            <TextBlock Text="Introduce tu dirección de correo electrónico para continuar"
+                       HorizontalAlignment="Center"
+                       FontSize="18"/>
+            <!--Datos de login-->
+            <Border>
+                <StackPanel>
+                    
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        
+        
+        <!--COLUMNA 2 (BOTONES)-->
+        
     </Grid>
 </UserControl>

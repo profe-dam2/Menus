@@ -4,7 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Menus.ViewModels"
              xmlns:fa="using:FluentAvalonia.UI.Controls"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d"
+             Width="1280" Height="720"
+             d:DesignWidth="1280" 
+             d:DesignHeight="720"
              x:Class="Menus.Views.MainView"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
