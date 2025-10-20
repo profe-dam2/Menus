@@ -20,6 +20,9 @@
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
+        <PackageReference Include="DialogHost.Avalonia" />
         <PackageReference Include="FluentAvaloniaUI" />
+        <PackageReference Include="Material.Avalonia" />
+        <PackageReference Include="Material.Icons.Avalonia" />
     </ItemGroup>
 </Project>

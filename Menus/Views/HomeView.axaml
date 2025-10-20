@@ -3,6 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Menus.ViewModels"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              Width="1280" Height="720"
              d:DesignWidth="1280" 
              d:DesignHeight="720"
@@ -52,7 +55,55 @@
         </StackPanel>
         
         
-        <!--COLUMNA 2 (BOTONES)-->
+        <!--COLUMNA 2 (BOTONES Y DIALOGO)-->
+        <Grid Grid.Column="2" RowDefinitions="200,*,200">
+            <dialogHostAvalonia:DialogHost 
+                IsOpen="True" Background="Transparent"
+                Height="580" Margin="20"
+                Grid.RowSpan="3">
+                
+                <dialogHostAvalonia:DialogHost.DialogContent>
+                    <StackPanel Background="Transparent">
+                        <TextBlock Text="AYUDA" 
+                                   Foreground="White"
+                                   FontSize="30"
+                                   HorizontalAlignment="Center"/>
+                        <avalonia:MaterialIcon Kind="Account" Width="25"
+                                               Height="25"/>
+                        
+                        <avalonia:MaterialIcon Kind="AccountAdd" Width="25"
+                                               Height="25"/>
+                        
+                        <avalonia:MaterialIcon Kind="Subscriptions" Width="25"
+                                               Height="25"/>
+                    </StackPanel>
+                </dialogHostAvalonia:DialogHost.DialogContent>
+            </dialogHostAvalonia:DialogHost>
+            
+            <!-- Fila 0 del Grid de la columna 2 -->
+            <StackPanel>
+                <Button Theme="{StaticResource MaterialOutlineButton}" 
+                        Content="Custom corner radius" 
+                        CornerRadius="16"></Button>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="1">
+                
+            </StackPanel>
+            
+            <Grid Grid.Row="2">
+                <controls:FloatingButton HorizontalAlignment="Center"
+                                         
+                                         VerticalAlignment="Center">
+                    <controls:FloatingButton.Content>
+                        <avalonia:MaterialIcon Kind="HelpCircle" Width="25"
+                                               Height="25"/>
+                    </controls:FloatingButton.Content>
+                </controls:FloatingButton>
+            </Grid>
+            
+            
+        </Grid>
         
     </Grid>
 </UserControl>
