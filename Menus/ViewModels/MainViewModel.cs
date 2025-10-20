@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using FluentAvalonia.UI.Controls;
 using Menus.Services;
 using Menus.Views;
@@ -10,10 +11,14 @@ public partial class MainViewModel : ViewModelBase
 {
     [ObservableProperty]
     private NavigationService navigationService = new();
+
+
     
     public MainViewModel()
     {
     }// final constructor
+
+    
     
 
 }// final de clase

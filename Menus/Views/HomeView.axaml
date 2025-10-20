@@ -29,6 +29,39 @@
             <ColumnDefinition Width="300"/> <!--COLUMNA PARA BOTONES-->
         </Grid.ColumnDefinitions>
         
+        <dialogHostAvalonia:DialogHost ZIndex="1"
+            IsOpen="{Binding IsExitDialgoOpen}" Background="Transparent" Margin="20"
+            Grid.ColumnSpan="3">
+                
+            <dialogHostAvalonia:DialogHost.DialogContent>
+                <Grid RowDefinitions="*,*,*" Width="320">
+                    <Grid.Background>
+                        <SolidColorBrush Opacity=".8" Color="Black"/>
+                    </Grid.Background>
+                    <StackPanel HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Margin="10">
+                        <TextBlock Text="Atención" 
+                                   VerticalAlignment="Center"
+                                   Foreground="White"
+                                   FontSize="17"/>
+                        <avalonia:MaterialIcon Kind="Warning" Width="25"
+                                               Height="25"/>
+                    </StackPanel>
+                            
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" 
+                               Margin="20" 
+                               Text="¿Deseas abandonar esta página?"/>
+                    
+                    <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0" Orientation="Horizontal">
+                        <Button Content="ACEPTAR" Margin="10" Width="120"/>
+                        <Button Content="CANCELAR" Margin="10" Width="120" Command="{Binding CloseExitDialgCommand}"/>
+                    </StackPanel>
+                </Grid>
+            </dialogHostAvalonia:DialogHost.DialogContent>
+        </dialogHostAvalonia:DialogHost>
+        
+        
         <!--COLUMNA 0 (IMAGEN)-->
         <StackPanel Grid.Column="0">
             <Image Width="90" 
@@ -58,7 +91,7 @@
         <!--COLUMNA 2 (BOTONES Y DIALOGO)-->
         <Grid Grid.Column="2" RowDefinitions="200,*,200">
             <dialogHostAvalonia:DialogHost 
-                IsOpen="True" Background="Transparent"
+                IsOpen="{Binding IsHelpDialogOpen}" Background="Transparent"
                 Height="580" Margin="20"
                 Grid.RowSpan="3">
                 
@@ -84,6 +117,7 @@
             <StackPanel>
                 <Button Theme="{StaticResource MaterialOutlineButton}" 
                         Content="Custom corner radius" 
+                        Command="{Binding OpenExitDialgCommand}"
                         CornerRadius="16"></Button>
             </StackPanel>
             
@@ -93,7 +127,7 @@
             
             <Grid Grid.Row="2">
                 <controls:FloatingButton HorizontalAlignment="Center"
-                                         
+                                         Command="{Binding OpenHelpDialogCommand }"
                                          VerticalAlignment="Center">
                     <controls:FloatingButton.Content>
                         <avalonia:MaterialIcon Kind="HelpCircle" Width="25"
