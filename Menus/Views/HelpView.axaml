@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Menus.ViewModels"
+             xmlns:SystemDecorations="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
              Width="1280" Height="720"
              d:DesignWidth="1280" 
@@ -12,15 +13,60 @@
     <Design.DataContext>
         <vm:HelpViewModel />
     </Design.DataContext>
-    <Grid Background="DarkOrange">
-        <StackPanel>
-            <TextBlock Text="AYUDA AL USUARIO"/>
-            <Button Content="IR A INICIO"
-                    Command="{Binding NavigateToCommand}"
-                    CommandParameter="inicio"/>
-            <Button Content="IR A SHOP"
-                    Command="{Binding NavigateToCommand}"
-                    CommandParameter="tienda"/>
-        </StackPanel>
+    <Grid>
+        <TabControl Name="tabcontrol" SelectedIndex="{Binding PageIndex}">
+            <TabControl.ContentTemplate>
+                <DataTemplate x:DataType="SystemDecorations:Object">
+                    <TransitioningContentControl Content="{Binding}"
+                                                 IsTransitionReversed="{Binding ElementName=tabcontrol, 
+                                                 Path=DataContext.IsReverse}">
+                        <TransitioningContentControl.PageTransition>
+                            <!-- <CrossFade Duration="0:0:0.5"/> -->
+                            <!-- <PageSlide Duration="0:0:0.5"/> -->
+                            <Rotate3DTransition Duration="0:0:0.5"/>
+                        </TransitioningContentControl.PageTransition>
+                    </TransitioningContentControl>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+            
+            <TabControl.Items>
+                <TabItem Header="INICIO" >
+                    <StackPanel Background="DarkSlateBlue" DataContext="{Binding ElementName=tabcontrol, 
+                Path=DataContext}">
+                        <TextBlock Classes="Centered" Text="Page 1" />
+                        <TextBlock Text="AYUDA AL USUARIO"/>
+                        <Button Content="IR A INICIO"
+                                Command="{Binding NavigateToCommand}"
+                                CommandParameter="inicio"/>
+                        <Button Content="IR A SHOP"
+                                Command="{Binding NavigateToCommand}"
+                                CommandParameter="tienda"/>
+                        <Button Content="IR A USUARIOS" 
+                                Command="{Binding IrAUsuariosCommand}"
+                                Margin="10"
+                                Width="200"/>
+                    </StackPanel>
+                </TabItem>
+                
+                <TabItem Header="USUARIOS" >
+                    <StackPanel Background="Olive" DataContext="{Binding ElementName=tabcontrol, 
+                Path=DataContext}">
+                        <TextBlock Classes="Centered" Text="Page 1" />
+                        <Button Content="ATRAS" Command="{Binding IrAtrasCommand}"/>
+                    </StackPanel>
+                </TabItem>
+                
+                <TabItem Header="CONFIGURACIÓN">
+                    <StackPanel Background="Teal" DataContext="{Binding ElementName=tabcontrol, 
+                Path=DataContext}">
+                        <TextBlock Classes="Centered" Text="Page 3" />
+                    </StackPanel>
+                </TabItem>
+                
+            </TabControl.Items>
+        </TabControl>
+        <!-- <StackPanel> -->
+        
+        <!-- </StackPanel> -->
     </Grid>
 </UserControl>

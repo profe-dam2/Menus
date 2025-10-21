@@ -23,7 +23,15 @@ public partial class HomeViewModel:ViewModelBase
     [RelayCommand]
     public void OpenHelpDialog()
     {
-        IsHelpDialogOpen = !IsHelpDialogOpen;
+        if (IsHelpDialogOpen == true)
+        {
+            IsHelpDialogOpen = false;
+        }
+        else
+        {
+            IsHelpDialogOpen = true;
+        }
+        //IsHelpDialogOpen = !IsHelpDialogOpen;
     }
 
     [RelayCommand]
