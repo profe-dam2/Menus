@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Menus.ViewModels"
              xmlns:SystemDecorations="clr-namespace:System;assembly=System.Runtime"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              mc:Ignorable="d"
              Width="1280" Height="720"
              d:DesignWidth="1280" 
@@ -31,8 +32,9 @@
             
             <TabControl.Items>
                 <TabItem Header="INICIO" >
-                    <StackPanel Background="DarkSlateBlue" DataContext="{Binding ElementName=tabcontrol, 
-                Path=DataContext}">
+                    <StackPanel Background="DarkSlateBlue" 
+                                DataContext="{Binding ElementName=tabcontrol, 
+                                                Path=DataContext}">
                         <TextBlock Classes="Centered" Text="Page 1" />
                         <TextBlock Text="AYUDA AL USUARIO"/>
                         <Button Content="IR A INICIO"
@@ -41,18 +43,48 @@
                         <Button Content="IR A SHOP"
                                 Command="{Binding NavigateToCommand}"
                                 CommandParameter="tienda"/>
-                        <Button Content="IR A USUARIOS" 
+                        
+                        <!--LISTA DE LENGUAJES DE INTERES-->
+                        <ListBox ItemsSource="{Binding LanguageList}" 
+                                 HorizontalAlignment="Center"
+                                 SelectionMode="Toggle" 
+                                 SelectedItems="{Binding SelectedLanguages}"
+                                 Height="350" Width="500">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:Card Width="150" Height="150" 
+                                                   VerticalAlignment="Top">
+                                        <StackPanel Margin="0,4" Background="AliceBlue">
+                                            <Image Width="70" Height="70" Margin="10"
+                                                   Source="{Binding ImagePath}" />
+                                            <TextBlock Foreground="Black" 
+                                                       FontWeight="Bold" FontSize="20" 
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Text="{Binding Name}" />
+                                        </StackPanel>
+                                    </controls:Card>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ListBox>
+                        <Button Content="SIGUIENTE" 
                                 Command="{Binding IrAUsuariosCommand}"
                                 Margin="10"
                                 Width="200"/>
                     </StackPanel>
+                    
                 </TabItem>
                 
                 <TabItem Header="USUARIOS" >
-                    <StackPanel Background="Olive" DataContext="{Binding ElementName=tabcontrol, 
-                Path=DataContext}">
+                    <StackPanel Background="Olive">
                         <TextBlock Classes="Centered" Text="Page 1" />
-                        <Button Content="ATRAS" Command="{Binding IrAtrasCommand}"/>
+                        <Button Content="ATRAS" Command="{Binding ElementName=tabcontrol, 
+                        Path=DataContext.IrAtrasCommand}"/>
                     </StackPanel>
                 </TabItem>
                 
