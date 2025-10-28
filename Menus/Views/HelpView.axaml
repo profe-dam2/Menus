@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              mc:Ignorable="d"
              Width="1280" Height="720"
-             d:DesignWidth="1280" 
+             d:DesignWidth="1280"
              d:DesignHeight="720"
              x:Class="Menus.Views.HelpView"
              x:DataType="vm:HelpViewModel">
@@ -23,47 +23,76 @@
                                                  Path=DataContext.IsReverse}">
                         <TransitioningContentControl.PageTransition>
                             <!-- <CrossFade Duration="0:0:0.5"/> -->
-                            <!-- <PageSlide Duration="0:0:0.5"/> -->
-                            <Rotate3DTransition Duration="0:0:0.5"/>
+                            <PageSlide Duration="0:0:0.5" />
+                            <!-- <Rotate3DTransition Duration="0:0:0.5"/> -->
                         </TransitioningContentControl.PageTransition>
                     </TransitioningContentControl>
                 </DataTemplate>
             </TabControl.ContentTemplate>
-            
+
             <TabControl.Items>
-                <TabItem Header="INICIO" >
-                    <StackPanel Background="DarkSlateBlue" 
+                <TabItem Header="INICIO">
+                    <StackPanel Background="DarkSlateBlue"
                                 DataContext="{Binding ElementName=tabcontrol, 
                                                 Path=DataContext}">
                         <TextBlock Classes="Centered" Text="Page 1" />
-                        <TextBlock Text="AYUDA AL USUARIO"/>
+                        <TextBlock Text="AYUDA AL USUARIO" />
                         <Button Content="IR A INICIO"
+                                Classes="MiBoton2"
                                 Command="{Binding NavigateToCommand}"
-                                CommandParameter="inicio"/>
+                                CommandParameter="inicio" />
                         <Button Content="IR A SHOP"
+                                Classes="MiBoton"
                                 Command="{Binding NavigateToCommand}"
-                                CommandParameter="tienda"/>
+                                CommandParameter="tienda" />
+                        
+                        <HyperlinkButton Classes="MiBotonImagen"/>
                         
                         <!--LISTA DE LENGUAJES DE INTERES-->
-                        <ListBox ItemsSource="{Binding LanguageList}" 
+                        <ListBox ItemsSource="{Binding LanguageList}"
+                                 Name="ListaLenguajes"
                                  HorizontalAlignment="Center"
-                                 SelectionMode="Toggle" 
-                                 SelectedItems="{Binding SelectedLanguages}"
+                                 SelectionMode="Multiple, Toggle"
+                                 SelectedItems="{Binding ElementName=tabcontrol, 
+                                 Path=DataContext.SelectedLanguages}"
                                  Height="350" Width="500">
+                            <Interaction.Behaviors>
+                                <EventTriggerBehavior EventName="SelectionChanged">
+                                    <InvokeCommandAction
+                                        Command="{Binding SelectedLanguagesChangedCommand}"
+                                        CommandParameter="{Binding 
+                                        ElementName=ListaLenguajes, 
+                                        Path=SelectedItem}" />
+                                </EventTriggerBehavior>
+                            </Interaction.Behaviors>
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel/>
+                                    <WrapPanel />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
+
+                            <ListBox.Styles>
+                                <!-- <Style Selector="ListBoxItem:selected"> -->
+                                <!--     <Setter Property="Background" Value="Black"/> -->
+                                <!-- </Style> -->
+                                <!--Card seleccionada-->
+                                <Style Selector="ListBoxItem:selected controls|Card">
+                                    <Setter Property="Background" Value="Aquamarine" />
+                                    <Setter Property="BorderBrush" Value="Blue" />
+                                    <Setter Property="BorderThickness" Value="2" />
+                                </Style>
+                            </ListBox.Styles>
+
                             <ItemsControl.ItemTemplate>
+
                                 <DataTemplate>
-                                    <controls:Card Width="150" Height="150" 
+                                    <controls:Card Width="150" Height="150"
                                                    VerticalAlignment="Top">
                                         <StackPanel Margin="0,4" Background="AliceBlue">
                                             <Image Width="70" Height="70" Margin="10"
                                                    Source="{Binding ImagePath}" />
-                                            <TextBlock Foreground="Black" 
-                                                       FontWeight="Bold" FontSize="20" 
+                                            <TextBlock Foreground="Black"
+                                                       FontWeight="Bold" FontSize="20"
                                                        HorizontalAlignment="Center"
                                                        VerticalAlignment="Center"
                                                        Text="{Binding Name}" />
@@ -72,33 +101,86 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ListBox>
-                        <Button Content="SIGUIENTE" 
+                        <TextBlock Text="{Binding Info}"
+                                   HorizontalAlignment="Center"
+                                   FontSize="20" />
+                        <Button Content="SIGUIENTE"
+                                Background="Aqua"
                                 Command="{Binding IrAUsuariosCommand}"
                                 Margin="10"
-                                Width="200"/>
+                                IsEnabled="{Binding IsLanguageSelected}"
+                                Width="200" />
                     </StackPanel>
-                    
+
                 </TabItem>
-                
-                <TabItem Header="USUARIOS" >
-                    <StackPanel Background="Olive">
+
+                <TabItem Header="IDS">
+                    <StackPanel Background="Olive"
+                                DataContext="{Binding ElementName=tabcontrol, 
+                                                Path=DataContext}">
                         <TextBlock Classes="Centered" Text="Page 1" />
-                        <Button Content="ATRAS" Command="{Binding ElementName=tabcontrol, 
-                        Path=DataContext.IrAtrasCommand}"/>
+
+                        <!--LISTA DE ENTORNOS DE INTERES-->
+                        <ListBox ItemsSource="{Binding IdsList}"
+                                 HorizontalAlignment="Center"
+                                 SelectionMode="Multiple, Toggle"
+                                 Height="350" Width="500">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ListBox.Styles>
+                                <!-- <Style Selector="ListBoxItem:selected"> -->
+                                <!--     <Setter Property="Background" Value="Black"/> -->
+                                <!-- </Style> -->
+                                <!--Card seleccionada-->
+                                <Style Selector="ListBoxItem:selected controls|Card">
+                                    <Setter Property="Background" Value="Aquamarine" />
+                                    <Setter Property="BorderBrush" Value="Blue" />
+                                    <Setter Property="BorderThickness" Value="2" />
+                                </Style>
+                            </ListBox.Styles>
+
+                            <ItemsControl.ItemTemplate>
+
+                                <DataTemplate>
+                                    <controls:Card Width="150" Height="150"
+                                                   VerticalAlignment="Top">
+                                        <StackPanel Margin="0,4" Background="AliceBlue">
+                                            <Image Width="70" Height="70" Margin="10"
+                                                   Source="{Binding ImagePath}" />
+                                            <TextBlock Foreground="Black"
+                                                       FontWeight="Bold" FontSize="20"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Text="{Binding Name}"
+                                                       TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </controls:Card>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ListBox>
+
+                        <Button Content="ATRAS"
+                                Command="{Binding ElementName=tabcontrol, 
+                        Path=DataContext.IrAtrasCommand}" />
                     </StackPanel>
                 </TabItem>
-                
+
                 <TabItem Header="CONFIGURACIÓN">
-                    <StackPanel Background="Teal" DataContext="{Binding ElementName=tabcontrol, 
+                    <StackPanel Background="Teal"
+                                DataContext="{Binding ElementName=tabcontrol, 
                 Path=DataContext}">
-                        <TextBlock Classes="Centered" Text="Page 3" />
+                        
                     </StackPanel>
                 </TabItem>
-                
+
             </TabControl.Items>
         </TabControl>
         <!-- <StackPanel> -->
-        
+
         <!-- </StackPanel> -->
     </Grid>
 </UserControl>

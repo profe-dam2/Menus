@@ -1,0 +1,14 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <Style Selector="Button">
+                <Setter Property="Background" Value="DarkBlue"/>
+                <Setter Property="Foreground" Value="DarkGray"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="BorderBrush" Value="GreenYellow"/>
+                <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        
+        <Style Selector="TextBlock">
+                <Setter Property="FontWeight" Value="ExtraLight"/>
+        </Style>
+</Styles>

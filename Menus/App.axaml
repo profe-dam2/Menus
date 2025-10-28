@@ -15,6 +15,9 @@
     </Application.DataTemplates>
 
     <Application.Styles>
+        <StyleInclude Source="avares://Menus/Styles/ButtonStyles.axaml"/>
+        <StyleInclude Source="avares://Menus/Styles/ComponentStyles.axaml"/>
+        <StyleInclude Source="avares://Menus/Styles/Styles.axaml"/>
         <avalonia:MaterialIconStyles/>
         <styling:FluentAvaloniaTheme/>
         <themes:MaterialTheme BaseTheme="Dark" PrimaryColor="Purple" SecondaryColor="Lime"/>
