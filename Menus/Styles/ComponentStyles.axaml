@@ -1,12 +1,114 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles">
-        
-        <Style Selector="controls|Card.MiTarjeta">
-                
-        </Style>
-        
-        <Style Selector="controls|Card.MiTarjeta:pointerover">
-                
-        </Style>
+
+    <Style Selector="controls|Card.MiTarjeta">
+
+    </Style>
+
+    <Style Selector="controls|Card.MiTarjeta:pointerover">
+
+    </Style>
+    
+    <!-- ANIMACIÓN Tarjeta ROTACIÓN -->
+    <Style Selector="controls|Card.TarjetaRotada:pointerover">
+        <Style.Animations>
+            <Animation Duration="0:0:1" IterationCount="Infinite">
+                <KeyFrame Cue="0%">
+                    <Setter Property="RotateTransform.Angle" Value="0"/>
+                </KeyFrame>
+                <KeyFrame Cue="25%">
+                    <Setter Property="RotateTransform.Angle" Value="10"/>
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="RotateTransform.Angle" Value="0"/>
+                </KeyFrame>
+                <KeyFrame Cue="75%">
+                    <Setter Property="RotateTransform.Angle" Value="-10"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="RotateTransform.Angle" Value="0"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    
+    
+    
+    <!-- ANIMACIÓN BOTÓN ROTACIÓN -->
+    <Style Selector="Button.BotonRotado:pointerover">
+        <Style.Animations>
+            <Animation Duration="0:0:1" IterationCount="Infinite">
+                <KeyFrame Cue="0%">
+                    <Setter Property="RotateTransform.Angle" Value="0"/>
+                </KeyFrame>
+                <KeyFrame Cue="25%">
+                    <Setter Property="RotateTransform.Angle" Value="10"/>
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="RotateTransform.Angle" Value="0"/>
+                </KeyFrame>
+                <KeyFrame Cue="75%">
+                    <Setter Property="RotateTransform.Angle" Value="-10"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="RotateTransform.Angle" Value="0"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+    
+    <!-- ANIMACIÓN BOTÓN DEFORMADO EN X-->
+    <Style Selector="Button.BotonDeformado:pointerover">
+        <Style.Animations>
+            <Animation Duration="0:0:1" IterationCount="Infinite">
+                <KeyFrame Cue="0%">
+                    <Setter Property="SkewTransform.AngleX" Value="0"/>
+                </KeyFrame>
+                <KeyFrame Cue="25%">
+                    <Setter Property="SkewTransform.AngleX" Value="10"/>
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="SkewTransform.AngleX" Value="0"/>
+                </KeyFrame>
+                <KeyFrame Cue="75%">
+                    <Setter Property="SkewTransform.AngleX" Value="-10"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="SkewTransform.AngleX" Value="0"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <!--ANIMACIÓN BOTÓN REESCALADO-->
+    <Style Selector="Button.BotonAnimado:pointerover">
+        <Style.Animations>
+            <Animation Duration="0:0:2" IterationCount="Infinite">
+                <KeyFrame Cue="0%">
+                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+                <KeyFrame Cue="25%">
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.5" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.5" />
+                </KeyFrame>
+                <KeyFrame Cue="50%">
+                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+                <KeyFrame Cue="75%">
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.5" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.5" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                    <Setter Property="Background" Value="Blue"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+
+    </Style>
+
 </Styles>

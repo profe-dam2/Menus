@@ -37,17 +37,21 @@
                                                 Path=DataContext}">
                         <TextBlock Classes="Centered" Text="Page 1" />
                         <TextBlock Text="AYUDA AL USUARIO" />
-                        <Button Content="IR A INICIO"
-                                Classes="MiBoton2"
-                                Command="{Binding NavigateToCommand}"
-                                CommandParameter="inicio" />
-                        <Button Content="IR A SHOP"
-                                Classes="MiBoton"
-                                Command="{Binding NavigateToCommand}"
-                                CommandParameter="tienda" />
-                        
-                        <HyperlinkButton Classes="MiBotonImagen"/>
-                        
+                        <!-- <Button Content="IR A INICIO" -->
+                        <!--         Classes="MiBoton2" -->
+                        <!--         Command="{Binding NavigateToCommand}" -->
+                        <!--         CommandParameter="inicio" /> -->
+                        <!-- <Button Content="IR A SHOP" -->
+                        <!--         Classes="MiBoton" -->
+                        <!--         Command="{Binding NavigateToCommand}" -->
+                        <!--         CommandParameter="tienda" /> -->
+                        <!-- -->
+                        <!-- <HyperlinkButton Classes="MiBotonImagen" /> -->
+                        <!-- -->
+                        <!-- <Button Width="200" Content="CREAR" Classes="BotonAnimado" /> -->
+                        <!-- <Button Width="200" Margin="10" Content="BOTON" Classes="BotonDeformado BotonRotado BotonAnimado" /> -->
+                        <!-- <Button Width="200" Margin="10" Content="BOTON" Classes="BotonRotado" /> -->
+
                         <!--LISTA DE LENGUAJES DE INTERES-->
                         <ListBox ItemsSource="{Binding LanguageList}"
                                  Name="ListaLenguajes"
@@ -86,7 +90,7 @@
                             <ItemsControl.ItemTemplate>
 
                                 <DataTemplate>
-                                    <controls:Card Width="150" Height="150"
+                                    <controls:Card Width="150" Height="150" Classes="TarjetaRotada"
                                                    VerticalAlignment="Top">
                                         <StackPanel Margin="0,4" Background="AliceBlue">
                                             <Image Width="70" Height="70" Margin="10"
@@ -173,7 +177,7 @@
                     <StackPanel Background="Teal"
                                 DataContext="{Binding ElementName=tabcontrol, 
                 Path=DataContext}">
-                        
+
                     </StackPanel>
                 </TabItem>
 
