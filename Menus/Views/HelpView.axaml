@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Menus.ViewModels"
+             xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
              xmlns:SystemDecorations="clr-namespace:System;assembly=System.Runtime"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              mc:Ignorable="d"
@@ -15,7 +16,8 @@
         <vm:HelpViewModel />
     </Design.DataContext>
     <Grid>
-        <TabControl Name="tabcontrol" SelectedIndex="{Binding PageIndex}">
+        <TabControl Name="tabcontrol" 
+                    SelectedIndex="{Binding PageIndex}">
             <TabControl.ContentTemplate>
                 <DataTemplate x:DataType="SystemDecorations:Object">
                     <TransitioningContentControl Content="{Binding}"
@@ -58,7 +60,7 @@
                                  HorizontalAlignment="Center"
                                  SelectionMode="Multiple, Toggle"
                                  SelectedItems="{Binding ElementName=tabcontrol, 
-                                 Path=DataContext.SelectedLanguages}"
+                                 Path=DataContext.RegisterModel.SelectedLanguages}"
                                  Height="350" Width="500">
                             <Interaction.Behaviors>
                                 <EventTriggerBehavior EventName="SelectionChanged">
@@ -110,7 +112,10 @@
                                    FontSize="20" />
                         <Button Content="SIGUIENTE"
                                 Background="Aqua"
-                                Command="{Binding IrAUsuariosCommand}"
+                                Command="{Binding 
+                                ElementName=tabcontrol, 
+                                Path=DataContext.CambiarTabCommand}"
+                                CommandParameter="1"
                                 Margin="10"
                                 IsEnabled="{Binding IsLanguageSelected}"
                                 Width="200" />
@@ -169,15 +174,30 @@
 
                         <Button Content="ATRAS"
                                 Command="{Binding ElementName=tabcontrol, 
-                        Path=DataContext.IrAtrasCommand}" />
+                                Path=DataContext.CambiarTabCommand}"
+                                CommandParameter="-1"/>
+                        
+                        <Button Content="SIGUIENTE"
+                                Command="{Binding CambiarTabCommand}"
+                                CommandParameter="1"/>
                     </StackPanel>
                 </TabItem>
 
-                <TabItem Header="CONFIGURACIÓN">
+                <TabItem Header="REGISTRO">
                     <StackPanel Background="Teal"
                                 DataContext="{Binding ElementName=tabcontrol, 
                 Path=DataContext}">
-
+                        <ComboBox Theme="{StaticResource MaterialOutlineComboBox}" 
+                                  p1:ComboBoxAssist.Label="Provincias"
+                                  SelectedItem="{Binding SelectedProvincia}"
+                                  ItemsSource="{Binding Provincias}"
+                                  Width="300"/>
+                        
+                        <ComboBox Theme="{StaticResource MaterialOutlineComboBox}" 
+                                  p1:ComboBoxAssist.Label="Municipios"
+                                  ItemsSource="{Binding Municipios}"
+                                  Width="300"/>
+                        
                     </StackPanel>
                 </TabItem>
 

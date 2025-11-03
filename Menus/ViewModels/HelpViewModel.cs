@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 using Avalonia.Collections;
+using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -16,6 +20,10 @@ public partial class HelpViewModel:ViewModelBase
 {
     private NavigationService navigationService;
 
+    [ObservableProperty] ObservableCollection<string> provincias =new();
+    [ObservableProperty] ObservableCollection<string> municipios =new();
+    [ObservableProperty] private string selectedProvincia;
+    
     [ObservableProperty] private bool isLanguageSelected;
     
     [ObservableProperty] private int pageIndex=0;
@@ -27,23 +35,66 @@ public partial class HelpViewModel:ViewModelBase
     [ObservableProperty] private ObservableCollection<LanguageModel> idsList = new();
     //Lista de lenguajes
     [ObservableProperty] private ObservableCollection<LanguageModel> languageList = new();
-    [ObservableProperty] private ObservableCollection<LanguageModel> selectedLanguages = new();
+    //[ObservableProperty] private ObservableCollection<LanguageModel> selectedLanguages = new();
+    
+    [ObservableProperty] private RegisterModel registerModel = new();
+    
     public HelpViewModel(NavigationService navigationService)
     {
         this.navigationService = navigationService;
         LoadLanguageList();
         LoadIDSList();
+        _ = ObtenerProvincias();
+        
     }
 
     public HelpViewModel()
+    { }
+
+    partial void OnSelectedProvinciaChanged(string value)
     {
+        _ = ObtenerMunicipios(value);
+    }
+    
+    
+    private async Task ObtenerMunicipios(string provincia)
+    {
+        Municipios = new();
+        string url =
+            $"https://public.opendatasoft.com/api/records/1.0/search/?dataset=georef-spain-municipio&refine.prov_name={Uri.EscapeDataString(provincia)}&fields=mun_name,prov_name&rows=1000&sort=mun_name&format=json";
+        using HttpClient client = new();
+        string json = await client.GetStringAsync(url);
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        foreach (var record in 
+                 jsonDocument.RootElement.GetProperty("records").EnumerateArray())
+        {
+            var fields = record.GetProperty("fields");
+            var municipio = fields.GetProperty("mun_name");
+            Municipios.Add(municipio.ToString());
+        }
         
+    }
+
+    private async Task ObtenerProvincias()
+    {
+        string url = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=georef-spain-provincia&rows=60&fields=prov_name,prov_code,acom_name&sort=prov_name&format=json";
+        using HttpClient client = new();
+        string json = await client.GetStringAsync(url);
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+
+        foreach (var record in 
+                 jsonDocument.RootElement.GetProperty("records").EnumerateArray())
+        {
+            var fields = record.GetProperty("fields");
+            var provincia = fields.GetProperty("prov_name");
+            Provincias.Add(provincia.ToString());
+        }
     }
 
     [RelayCommand]
     public void SelectedLanguagesChanged(LanguageModel elementoSeleccionado)
     {
-        if (SelectedLanguages.Count == 0)
+        if (RegisterModel.SelectedLanguages.Count == 0)
         {
             IsLanguageSelected =  false;
         }
@@ -52,14 +103,14 @@ public partial class HelpViewModel:ViewModelBase
             IsLanguageSelected =  true;
         }
         
-        if (SelectedLanguages.Count == 5)
+        if (RegisterModel.SelectedLanguages.Count == 5)
         {
             //SelectedLanguages.Remove(elementoSeleccionado);
-            SelectedLanguages.Remove(SelectedLanguages.Last());
+            RegisterModel.SelectedLanguages.Remove(RegisterModel.SelectedLanguages.Last());
             return;
         }
         
-        Info = "HAS SELECCIONADO: " + SelectedLanguages.Count + "/4";
+        Info = "HAS SELECCIONADO: " + RegisterModel.SelectedLanguages.Count + "/4";
     }
     
 
@@ -71,10 +122,18 @@ public partial class HelpViewModel:ViewModelBase
     }
     
     [RelayCommand]
-    public void IrAtras()
+    public void CambiarTab(string pageIndex)
     {
-        PageIndex = 0;
-        IsReverse =  true;
+        if (pageIndex.Equals("1"))
+        {
+            PageIndex ++;
+            IsReverse =  false;
+        }
+        else
+        {
+            PageIndex--;
+            IsReverse =  true;
+        }
     }
     
 
